@@ -23,9 +23,10 @@ public class BaseSugar extends SugarRecord {
     }
 
 
-    public void created() {
+    public void create() {
         setServer_id(getId());
         setId(null);
+        save();
 
     }
 

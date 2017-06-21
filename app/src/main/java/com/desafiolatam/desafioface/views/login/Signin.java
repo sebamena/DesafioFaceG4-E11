@@ -36,7 +36,7 @@ public class Signin {
                     public void onResponse(Call<CurrentUser> call, Response<CurrentUser> response) {
                         if (200 == response.code() && response.isSuccessful()) {
                             CurrentUser user = response.body();
-                            user.created();
+                            user.create();
                             callback.success();
                         } else {
                             callback.failure();
