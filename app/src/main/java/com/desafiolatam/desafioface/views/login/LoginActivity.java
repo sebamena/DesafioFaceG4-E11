@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.desafiolatam.desafioface.R;
+import com.desafiolatam.desafioface.background.RecentUserService;
 
 public class LoginActivity extends AppCompatActivity implements SessionCallback {
 
@@ -71,15 +72,14 @@ public class LoginActivity extends AppCompatActivity implements SessionCallback 
 
     @Override
     public void success() {
-        Toast.makeText(this, "Funciono", Toast.LENGTH_SHORT).show();
-
+        RecentUserService.startActionRecentUsers(this);
 
     }
 
     @Override
     public void failure() {
         restoreView();
-        Toast.makeText(this, "mail o password Incorrecto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Mail o password Incorrecto", Toast.LENGTH_SHORT).show();
     }
 
 

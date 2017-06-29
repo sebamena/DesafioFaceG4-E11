@@ -1,4 +1,4 @@
-package com.desafiolatam.desafioface.networks;
+package com.desafiolatam.desafioface.networks.sessions;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -24,17 +24,13 @@ public class SplashActivity extends AppCompatActivity implements LoginCallback {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-
         new LoginValidation(this).init();
 
     }
-
     @Override
     public void signed() {
 
-
     }
-
 
     @Override
     public void signUp() {
@@ -44,8 +40,11 @@ public class SplashActivity extends AppCompatActivity implements LoginCallback {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
 
+
             }
-        }, 1200);
+        },1200);
+
+
 
     }
 }

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.desafiolatam.desafioface">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="com.orm.SugarApp"
@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="DATABASE"
             android:value="desafio_face" />
@@ -22,7 +21,6 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.desafiolatam.desafioface.models" />
-
 
         <activity
             android:name=".views.splash.SplashActivity"
@@ -43,7 +41,11 @@
             android:name=".views.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_login"
-            android:theme="@style/LoginTheme"/>
+            android:theme="@style/LoginTheme" />
+
+        <service
+            android:name=".background.RecentUserService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

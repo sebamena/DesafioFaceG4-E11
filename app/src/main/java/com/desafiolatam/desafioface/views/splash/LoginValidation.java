@@ -10,7 +10,6 @@ import java.util.List;
 
 public class LoginValidation {
 
-
     private LoginCallback callback;
 
     public LoginValidation(LoginCallback loginCallback) {
