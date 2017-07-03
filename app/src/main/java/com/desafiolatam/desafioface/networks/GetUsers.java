@@ -44,7 +44,7 @@ public class GetUsers extends AsyncTask<Map<String, String>, Integer, Integer> {
             }
 
         }
-        return result;
+        return null;
     }
 
 

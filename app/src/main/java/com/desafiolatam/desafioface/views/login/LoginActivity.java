@@ -1,7 +1,12 @@
 package com.desafiolatam.desafioface.views.login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,12 +15,16 @@ import android.widget.Toast;
 
 import com.desafiolatam.desafioface.R;
 import com.desafiolatam.desafioface.background.RecentUserService;
+import com.desafiolatam.desafioface.views.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements SessionCallback {
 
     private TextInputLayout mailWrapper, passWrapper;
     private EditText mailEt, passET;
     private Button button;
+
+    private IntentFilter intentFilter;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +51,34 @@ public class LoginActivity extends AppCompatActivity implements SessionCallback 
             }
         });
 
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(RecentUserService.USERS_FINISHED);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (RecentUserService.USERS_FINISHED.equals(action)) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
+            }
+        };
+
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
 
     private void restoreView() {
         mailEt.setError(null);
