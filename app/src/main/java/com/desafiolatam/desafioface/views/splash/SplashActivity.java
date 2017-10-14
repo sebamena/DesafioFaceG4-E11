@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity implements LoginCallback {
     }
     @Override
     public void signed() {
+        //TODO delete this nonse comment
 
     }
 
