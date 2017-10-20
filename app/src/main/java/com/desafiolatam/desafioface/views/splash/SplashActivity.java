@@ -1,16 +1,23 @@
 package com.desafiolatam.desafioface.views.splash;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.desafiolatam.desafioface.R;
+import com.desafiolatam.desafioface.background.RecentUserService;
 import com.desafiolatam.desafioface.views.login.LoginActivity;
+import com.desafiolatam.desafioface.views.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity implements LoginCallback {
-
+    private IntentFilter intentFilter;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +33,36 @@ public class SplashActivity extends AppCompatActivity implements LoginCallback {
 
         new LoginValidation(this).init();
 
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(RecentUserService.USERS_FINISHED);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (RecentUserService.USERS_FINISHED.equals(intent.getAction())) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        };
+
     }
     @Override
     public void signed() {
         //TODO delete this nonse comment
+        RecentUserService.startActionRecentUsers(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
     @Override

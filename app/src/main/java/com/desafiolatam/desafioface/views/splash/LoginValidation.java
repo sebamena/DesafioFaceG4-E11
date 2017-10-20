@@ -1,8 +1,6 @@
 package com.desafiolatam.desafioface.views.splash;
 
-import com.desafiolatam.desafioface.models.CurrentUser;
-
-import java.util.List;
+import com.desafiolatam.desafioface.data.CurrentUserQueries;
 
 /**
  * Created by adacher on 20-06-17.
@@ -17,8 +15,7 @@ public class LoginValidation {
     }
 
     public void init() {
-        List<CurrentUser> currentUsers = CurrentUser.listAll(CurrentUser.class);
-        if (currentUsers != null && currentUsers.size() > 0) {
+        if (new CurrentUserQueries().isLogged()) {
             callback.signed();
 
         } else {

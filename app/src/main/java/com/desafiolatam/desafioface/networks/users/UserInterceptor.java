@@ -1,6 +1,6 @@
 package com.desafiolatam.desafioface.networks.users;
 
-import com.desafiolatam.desafioface.models.CurrentUser;
+import com.desafiolatam.desafioface.data.CurrentUserQueries;
 import com.desafiolatam.desafioface.networks.sessions.LoginInteceptor;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class UserInterceptor {
 
                 Request request = originalRequest.newBuilder()
                     /*Common headers*/
-                        .header("authtoken", CurrentUser.listAll(CurrentUser.class).get(0).getAuth_token())
+                        .header("authtoken", new CurrentUserQueries().get().getAuth_token())
                         .header("Accept", "application/json")
                     /*Custom header*/
                         .header("Source", "mobile")
