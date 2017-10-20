@@ -77,6 +77,7 @@ public class DevelopersFragment extends Fragment {
                     public void run() {
                        refreshLayout.setRefreshing(false);
                        adapter.update();
+
                     }
                 },800);
             }
